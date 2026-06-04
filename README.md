@@ -1,4 +1,4 @@
-# IMDB Clone Monorepo
+# TECH ASSESSMENT
 
 This repository contains both the frontend (React/Vite) and the backend (Node.js/Express) for the IMDB Clone application.
 

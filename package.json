@@ -1,5 +1,5 @@
 {
-  "name": "imdb_clone_backend",
+  "name": "tech_assessment_backend",
   "version": "1.0.0",
   "description": " Sketch the layout of your application’s interface, focusing on usability and user experience. Use CSS frameworks like Bootstrap for a responsive design that adapts to various screen sizes.",
   "main": "server.js",
