@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { DeleteMovie, GetMovie } from "../../services/Index";
+import { DeleteMovie } from "../../services/Index";
 import ViewMovie from "./ViewMovie";
 import EditMovie from "./EditMovie";
 import AddMovie from "./AddMovie";
@@ -57,24 +57,13 @@ const Movies = ({ viewState, editState, addState }) => {
       setLoading(false);
     }
   };
-  const handleSearch = async () => {
-    setFilter({ name: searchText });
-
-    try {
-      const delay = Math.random() * 1000 + 500;
-      await new Promise((resolve) => setTimeout(resolve, delay));
-      const res = await GetMovie();
-      const list = res?.data?.map((item) => ({ ...item, key: item.id })) || [];
-      const searchedList = list.filter((m) =>
-        m.name?.toLowerCase().includes(searchText.toLowerCase()),
-      );
-      updateMovies(searchedList);
-    } catch (err) {
-      console.error(err);
-    }
+  const handleSearch = () => {
+    setFilter({ name: searchText }); //no need to refetch update locally
   };
+  
   useEffect(() => {
-    handleSearch();
+	  //removed handleSearch()
+    setFilter({ name: searchText }); // update filter only no need to refetch
   }, [searchText]);
 
   return (

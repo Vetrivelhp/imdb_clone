@@ -9,7 +9,7 @@ exports.getAllMovies = async (req, res) => {
       filter.name = name;
     }
 
-    const offset = page * limit;
+    const offset = (page - 1) * limit;  //fixed pagination offset
 
     const movies = await Movie.find(filter, limit, offset);
 
@@ -117,7 +117,8 @@ exports.updateMovie = async (req, res) => {
     const dataToUpdate = {};
     if (name !== undefined) dataToUpdate.name = name;
     if (yearOfRelease !== undefined) dataToUpdate.yearOfRelease = yearOfRelease;
-    // if (plot !== undefined) dataToUpdate.plot = plot;
+    //fixed plot commented out
+	if (plot !== undefined) dataToUpdate.plot = plot;
     if (posterUrl !== undefined) dataToUpdate.poster = posterUrl;
     if (producer !== undefined) dataToUpdate.producer = producer;
     if (actors !== undefined) dataToUpdate.actors = actors;
