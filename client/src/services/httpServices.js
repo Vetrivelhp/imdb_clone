@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL || "http://localhost:3000", //Added fallback url
+  baseURL: (import.meta.env.VITE_APP_API_URL || "http://localhost:5000") + "/api", //Added fallback url
   timeout: 500000,
   headers: {
     Accept: "application/json",
