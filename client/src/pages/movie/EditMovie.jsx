@@ -123,18 +123,18 @@ const EditMovie = () => {
       data.append("yearOfRelease", formData.yearOfRelease);
       data.append("plot", formData.plot);
       data.append("producer", formData.producer);
-      formData.actors.forEach((id) => data.append("actors[]", id));
+      formData.actors.forEach((id) => data.append("actors", id));
       if (imageFile) data.append("poster", imageFile);
 
       const res = await UpdateMovie(id, data);
-      if (res.data.id == id) {
+      if (res?.data) {
         console.log(res.message || "Movie updated successfully");
         const list = movies.map((d) => (d.id == id ? res.data : d));
 		//fixed update movies commented out
 		updateMovies(list);
         navigate(-1);
         showToast({
-          message: res.message || "updated successfully",
+          message: res.message || "Movies updated successfully",
           type: "success",
         });
       }

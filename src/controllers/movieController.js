@@ -56,15 +56,21 @@ exports.getMovieById = async (req, res) => {
     });
   }
 };
-
+ 
 exports.createMovie = async (req, res) => {
   try {
-    const { name, yearOfRelease, plot, producer, actors } = req.body;
-
+    const { name, yearOfRelease, plot, producer } = req.body;
+    // multer gives a string for 1 actor, array for multiple — normalize to array
+    const actors = req.body.actors
+      ? Array.isArray(req.body.actors)
+        ? req.body.actors
+        : [req.body.actors]
+      : [];
+ 
     let posterUrl = req.body.poster;
-
+ 
     if (req.file) {
-      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`;
       posterUrl = `${serverBase}/uploads/images/${req.file.filename}`;
     }
 
@@ -105,12 +111,18 @@ exports.createMovie = async (req, res) => {
 
 exports.updateMovie = async (req, res) => {
   try {
-    const { name, yearOfRelease, plot, producer, actors } = req.body;
-
+    const { name, yearOfRelease, plot, producer } = req.body;
+    // multer gives a string for 1 actor, array for multiple — normalize to array
+    const actors = req.body.actors
+      ? Array.isArray(req.body.actors)
+        ? req.body.actors
+        : [req.body.actors]
+      : undefined;
+ 
     let posterUrl = req.body.poster;
-
+ 
     if (req.file) {
-      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 3000}`;
       posterUrl = `${serverBase}/uploads/posters/${req.file.filename}`;
     }
 
