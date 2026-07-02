@@ -32,9 +32,8 @@ exports.createActor = async (req, res) => {
     let image = req.body.image;
 
     if (req.file) {
-      image = `${req.protocol}://${
-        req.get("X-Forwarded-Host") || req.get("Host")
-      }/uploads/images/${req.file.filename}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      image = `${serverBase}/uploads/images/${req.file.filename}`;
     }
 
     const actor = await Actor.create({ name, gender, dob, bio, image });
@@ -61,9 +60,8 @@ exports.updateActor = async (req, res) => {
     let image = req.body.image;
 
     if (req.file) {
-      image = `${req.protocol}://${
-        req.get("X-Forwarded-Host") || req.get("Host")
-      }/uploads/images/${req.file.filename}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      image = `${serverBase}/uploads/images/${req.file.filename}`;
     }
 
     const dataToUpdate = {};

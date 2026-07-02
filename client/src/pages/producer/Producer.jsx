@@ -22,7 +22,7 @@ const Producers = ({ viewState, editState, addState }) => {
 
   useEffect(() => {
     fetchProducers();
-  });
+  }, []); //Added missing dependency array causing infinite refetch loop
 
   const filteredProducers = producers.filter((producer) =>
     producer.name?.toLowerCase().includes(filter.name?.toLowerCase() || ""),

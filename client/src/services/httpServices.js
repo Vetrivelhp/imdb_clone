@@ -5,7 +5,7 @@ const instance = axios.create({
   timeout: 500000,
   headers: {
     Accept: "application/json",
-    "Content-Type": "application/json",
+    //Removed Hardcoded Content-Type: application/json
     // Removed - Access-Control-Allow-Origin: *
   },
 });

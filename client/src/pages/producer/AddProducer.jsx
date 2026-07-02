@@ -54,7 +54,7 @@ const AddProducer = () => {
       const fd = new FormData();
       fd.append("name", formData.name);
       fd.append("gender", formData.gender);
-      fd.append("dob", formData.dob);
+      fd.append("dob", moment(formData.dob).format("YYYY-MM-DD"));
       fd.append("bio", formData.bio);
       if (imageFile) fd.append("image", imageFile.originFileObj);
 
@@ -166,9 +166,9 @@ const AddProducer = () => {
               <label className="add-producer-label">Date of Birth</label>
               <input
                 type="date"
-                value={formData.dob ? formData.dob.format("YYYY-MM-DD") : ""}
+                value={formData.dob || ""}
                 onChange={(e) =>
-                  setFormData({ ...formData, dob: moment(e.target.value) })
+                  setFormData({ ...formData, dob: e.target.value })
                 }
                 className="add-producer-input"
               />

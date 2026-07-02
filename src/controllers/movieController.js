@@ -64,9 +64,8 @@ exports.createMovie = async (req, res) => {
     let posterUrl = req.body.poster;
 
     if (req.file) {
-      posterUrl = `${req.protocol}://${
-        req.get("X-Forwarded-Host") || req.get("Host")
-      }/uploads/images/${req.file.filename}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      posterUrl = `${serverBase}/uploads/images/${req.file.filename}`;
     }
 
     if (name && name.length <= 30) {
@@ -111,9 +110,8 @@ exports.updateMovie = async (req, res) => {
     let posterUrl = req.body.poster;
 
     if (req.file) {
-      posterUrl = `${req.protocol}://${
-        req.get("X-Forwarded-Host") || req.get("Host")
-      }/uploads/posters/${req.file.filename}`;
+      const serverBase = process.env.SERVER_URL || `http://localhost:${process.env.PORT || 5000}`;
+      posterUrl = `${serverBase}/uploads/posters/${req.file.filename}`;
     }
 
     const dataToUpdate = {};
