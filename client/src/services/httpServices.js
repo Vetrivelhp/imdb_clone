@@ -1,12 +1,12 @@
 import axios from "axios";
 
 const instance = axios.create({
-  baseURL: import.meta.env.VITE_APP_API_URL,
+  baseURL: import.meta.env.VITE_APP_API_URL || "http://localhost:3000", //Added fallback url
   timeout: 500000,
   headers: {
     Accept: "application/json",
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    // Removed - Access-Control-Allow-Origin: *
   },
 });
 
@@ -15,7 +15,8 @@ instance.interceptors.request.use(function (config) {
   return {
     ...config,
     headers: {
-      "Access-Control-Allow-Origin": "*",
+      // Removed - Access-Control-Allow-Origin: *
+	  ...config.headers,   // preserve existing headers
       Authorization: `Bearer ${token}`,
     },
   };
